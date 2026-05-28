@@ -1,0 +1,318 @@
+\documentclass[conference]{IEEEtran}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{cite}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+
+\title{Implementación y Análisis de Inferencia de E2D2: un Transformer Encoder--Decoder de Difusión Discreta para Traducción Automática}
+
+\author{
+\IEEEauthorblockA{
+Procesamiento de Datos Secuenciales con Deep Learning\\
+Universidad Autónoma Occidente\\
+Especialización 202601
+}\\[1ex]
+\begin{tabular}{>{\centering\arraybackslash}p{0.22\textwidth}
+                >{\centering\arraybackslash}p{0.22\textwidth}
+                >{\centering\arraybackslash}p{0.22\textwidth}
+                >{\centering\arraybackslash}p{0.22\textwidth}}
+Nicolás Vásquez Renjifo &
+Jorge Luis Fong Gutierrez &
+Jhonatan David Rengifo Bermeo &
+Mateo González Ruiz \\
+\texttt{\scriptsize nicolas.vasquez@uao.edu.co} &
+\texttt{\scriptsize jorge.fong@uao.edu.co} &
+\texttt{\scriptsize jhonatan.rengifo@uao.edu.co} &
+\texttt{\scriptsize mateo.gonzalez@uao.edu.co} \\
+Ingeniero Mecatrónico &
+Ingeniero Mecatrónico &
+Ingeniero Mecatrónico &
+Ingeniero Mecatrónico
+\end{tabular}
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Este trabajo presenta la implementación y evaluación experimental de E2D2, una arquitectura Transformer encoder--decoder basada en modelos de difusión discreta para lenguaje natural. El proyecto responde a la consigna de implementar inferencia sobre una arquitectura Transformer encoder--decoder aplicada a datos secuenciales complejos, sin entrenar desde cero, utilizando un artículo científico con código y pesos preentrenados disponibles. Se utiliza el checkpoint \texttt{kuleshov-group/e2d2-wmt}, entrenado sobre WMT14 de-en, y se evalúa su comportamiento en traducción alemán--inglés. El estudio incluye inspección interna de la arquitectura, inferencia en Google Colab, un estudio de ablación sobre \texttt{block\_size}, pasos de difusión y caché, comparación extendida con el baseline autoregresivo \texttt{Helsinki-NLP/opus-mt-de-en}, y análisis cualitativo de errores. Los resultados muestran que la configuración oficial de E2D2, \texttt{block\_size=4} y \texttt{num\_steps=4}, es la más equilibrada entre las variantes E2D2 evaluadas. En la evaluación extendida de 150 ejemplos, E2D2 obtiene BLEU 16.53 y chrF 49.66, mientras que OPUS-MT obtiene BLEU 25.02 y chrF 54.09. Estos resultados permiten discutir críticamente las diferencias entre decodificación autoregresiva y generación por denoising discreto.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Transformer, encoder--decoder, difusión discreta, E2D2, traducción automática, inferencia, WMT14.
+\end{IEEEkeywords}
+
+\section{Introducción}
+
+Los modelos Transformer han dominado gran parte del procesamiento de lenguaje natural debido a su capacidad para modelar dependencias de largo alcance en secuencias. Tradicionalmente, las tareas de generación de texto, como traducción o resumen, se han abordado con modelos autoregresivos que generan un token a la vez. Aunque este paradigma es efectivo, su naturaleza secuencial limita la paralelización durante la inferencia.
+
+El artículo \emph{Encoder-Decoder Diffusion Language Models for Efficient Training and Inference} propone E2D2, una arquitectura Transformer encoder--decoder que adapta modelos de difusión discreta al modelado de lenguaje \cite{arriola2025e2d2}. La idea central es separar dos tipos de computación: la representación de tokens limpios mediante un encoder grande, y el denoising iterativo de tokens corruptos mediante un decoder más liviano. Esta separación busca mejorar la eficiencia de inferencia respecto a modelos de difusión decoder-only.
+
+Este proyecto implementa inferencia con E2D2 sobre traducción alemán--inglés. La tarea se considera adecuada para la consigna porque el lenguaje natural es una secuencia compleja y no corresponde a series de tiempo tabulares o sensores. Además, el paper seleccionado cuenta con repositorio oficial, integración en Hugging Face y pesos preentrenados disponibles \cite{kuleshov_e2d2_repo,hf_e2d2_wmt}.
+
+\section{Objetivos}
+
+El objetivo general es implementar y analizar una arquitectura Transformer encoder--decoder aplicada a datos secuenciales complejos, usando inferencia con pesos preentrenados.
+
+Los objetivos específicos son:
+
+\begin{itemize}
+    \item Revisar la arquitectura E2D2 propuesta en el artículo base.
+    \item Cargar pesos preentrenados oficiales y ejecutar inferencia en Google Colab.
+    \item Inspeccionar la configuración interna del modelo cargado.
+    \item Evaluar el impacto de \texttt{block\_size}, \texttt{num\_steps} y uso de caché.
+    \item Comparar E2D2 contra un baseline Transformer encoder--decoder autoregresivo.
+    \item Analizar errores cualitativos de traducción y discutir limitaciones.
+\end{itemize}
+
+\section{Cumplimiento de la Consigna}
+
+La Tabla \ref{tab:consigna} resume cómo el proyecto satisface explícitamente los requisitos de la consigna.
+
+\begin{table*}[htbp]
+\caption{Verificación de cumplimiento de la consigna}
+\label{tab:consigna}
+\centering
+\begin{tabular}{p{0.28\textwidth}p{0.62\textwidth}}
+\toprule
+\textbf{Requisito} & \textbf{Cumplimiento en el proyecto} \\
+\midrule
+Arquitectura Transformer encoder--decoder & Se implementa inferencia con E2D2, una arquitectura con encoder Transformer y decoder Transformer de difusión. \\
+Datos secuenciales complejos & Se trabaja con lenguaje natural, específicamente traducción automática alemán--inglés. \\
+No usar series de tiempo tradicionales & No se usan datos tabulares, sensores ni registros estructurados. \\
+Artículo científico base & El proyecto se basa en el paper \emph{Encoder-Decoder Diffusion Language Models for Efficient Training and Inference}. \\
+Código disponible & Se usa el repositorio oficial publicado por Kuleshov Group. \\
+Pesos preentrenados & Se usa el checkpoint público \texttt{kuleshov-group/e2d2-wmt}. \\
+No entrenar desde cero & Solo se ejecuta inferencia y evaluación con pesos preentrenados. \\
+Explicación profunda & Se documentan arquitectura, block diffusion, máscaras conceptuales, métricas, ablación, baseline y errores. \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\section{Arquitectura E2D2}
+
+E2D2 es una arquitectura encoder--decoder diseñada para modelos de difusión discreta en lenguaje. A diferencia de un Transformer encoder--decoder clásico, donde el decoder suele generar tokens autoregresivamente, E2D2 utiliza un decoder de difusión que refina tokens ruidosos o enmascarados.
+
+\subsection{Componentes}
+
+La arquitectura divide el procesamiento en dos módulos principales:
+
+\begin{itemize}
+    \item \textbf{Encoder:} procesa tokens limpios, como el prompt, la fuente alemana o bloques ya generados. En el checkpoint WMT usado, el encoder tiene 28 capas.
+    \item \textbf{Decoder:} realiza denoising sobre el bloque activo. En el checkpoint WMT usado, el decoder tiene 4 capas.
+\end{itemize}
+
+Esta asimetría permite que el encoder, más costoso, se invoque con menor frecuencia, mientras que el decoder, más pequeño, puede ejecutarse múltiples veces durante el refinamiento de cada bloque.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    node distance=0.28cm,
+    box/.style={draw, rounded corners, align=center, minimum width=3.15cm, minimum height=0.75cm, font=\footnotesize},
+    arrow/.style={-{Latex[length=2mm]}, thick}
+]
+\node[box] (src) {Texto fuente\\en alemán};
+\node[box, below=of src] (enc) {Encoder Transformer\\grande: 28 capas};
+\node[box, below=of enc] (h) {Representaciones\\limpias $h$};
+\node[box, below=of h] (dec) {Decoder Transformer\\difusión: 4 capas};
+\node[box, below=of dec] (block) {Bloque objetivo ruidoso\\$[MASK,\ldots,MASK]$};
+\node[box, below=of block] (out) {Traducción\\inglés};
+\draw[arrow] (src) -- (enc);
+\draw[arrow] (enc) -- (h);
+\draw[arrow] (h) -- (dec);
+\draw[arrow] (block) -- (dec);
+\draw[arrow] (dec) -- (out);
+\draw[arrow] (dec.east) .. controls +(1.0,0.0) and +(1.0,0.0) .. node[right, font=\scriptsize, align=center]{T pasos\\de denoising} (block.east);
+\end{tikzpicture}
+\caption{Flujo conceptual de inferencia en E2D2. El encoder representa tokens limpios y el decoder refina tokens ruidosos por bloques.}
+\label{fig:e2d2_diagrama}
+\end{figure}
+
+\subsection{Block Diffusion}
+
+En block diffusion, la secuencia se divide en bloques de tamaño $S$. Para cada bloque, el modelo parte de una representación ruidosa y aplica pasos de denoising. La inferencia puede representarse conceptualmente como:
+
+\begin{verbatim}
+1. Codificar la secuencia fuente con el encoder.
+2. Inicializar un bloque objetivo con tokens ruidosos.
+3. Ejecutar T pasos de denoising con el decoder.
+4. Agregar el bloque generado al contexto.
+5. Repetir hasta completar la secuencia.
+\end{verbatim}
+
+El checkpoint E2D2-WMT utiliza \texttt{block\_size=4} y \texttt{num\_steps=4} como configuración oficial.
+
+\section{Metodología}
+
+\subsection{Entorno}
+
+Los experimentos se ejecutaron en Google Colab con GPU Tesla T4 y 15.64 GB de VRAM. Aunque el notebook incluye detección experimental de TPU/XLA, la corrida registrada se realizó con CUDA. Las dependencias principales fueron \texttt{transformers==4.52.4}, \texttt{accelerate==1.11.0}, \texttt{datasets==4.2.0}, \texttt{evaluate}, \texttt{sacrebleu} y \texttt{sentencepiece}.
+
+\subsection{Modelo Principal}
+
+El modelo principal fue \texttt{kuleshov-group/e2d2-wmt}, publicado en Hugging Face. La Tabla \ref{tab:arquitectura} resume los atributos inspeccionados directamente desde el checkpoint.
+
+Para reproducibilidad, se fijó la revisión exacta del checkpoint E2D2-WMT en Hugging Face: \texttt{7c65309acc0d6d89049c9aca4ea02f9d10d1da5a}. El baseline OPUS-MT también se fijó a la revisión \texttt{1a922f3b32a8e809e17a47d4b32142d8105924e5}. Esto evita que una actualización remota altere silenciosamente los resultados.
+
+\begin{table}[htbp]
+\caption{Configuración inspeccionada del checkpoint E2D2-WMT}
+\label{tab:arquitectura}
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{Atributo} & \textbf{Valor} \\
+\midrule
+Tipo de modelo & E2D2 \\
+Tipo de difusión & absorbing \\
+Capas del encoder & 28 \\
+Capas del decoder & 4 \\
+Hidden size & 512 \\
+Intermediate size & 1536 \\
+Block size & 4 \\
+Longitud máxima & 256 \\
+Tokenizer & Qwen/Qwen3-0.6B-Base \\
+Parámetros totales & 331.8M \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Dataset}
+
+Se utilizó una muestra inicial de 30 ejemplos del conjunto de prueba WMT14 de-en para el estudio de ablación y análisis cualitativo. Adicionalmente, el notebook final incluye una sección de evaluación extendida configurada para 150 ejemplos, enfocada en comparar la configuración oficial de E2D2 contra el baseline OPUS-MT. Cada ejemplo contiene una fuente en alemán y una referencia humana en inglés. El tamaño de muestra extendido busca mejorar la robustez empírica sin convertir el proyecto en una reproducción completa de todas las evaluaciones del paper.
+
+\subsection{Baseline}
+
+Para contrastar E2D2 con una arquitectura encoder--decoder autoregresiva tradicional, se utilizó \texttt{Helsinki-NLP/opus-mt-de-en}, un modelo OPUS-MT alemán--inglés \cite{tiedemann2020opusmt}. Este baseline tiene aproximadamente 74.4M parámetros y genera traducciones mediante decodificación autoregresiva.
+
+\subsection{Métricas}
+
+Se reportaron las siguientes métricas:
+
+\begin{itemize}
+    \item \textbf{BLEU:} métrica estándar de traducción automática basada en coincidencias de n-gramas \cite{post2018call}.
+    \item \textbf{chrF:} métrica basada en F-score de caracteres, útil para variaciones morfológicas y lexicales \cite{popovic2015chrf}.
+    \item \textbf{Tiempo promedio:} segundos por ejemplo.
+    \item \textbf{Tokens por segundo:} throughput de generación.
+    \item \textbf{Repetición de bigramas:} tasa simple de bigramas repetidos en la salida.
+\end{itemize}
+
+\section{Implementación}
+
+La inferencia se implementó en un notebook de Colab. La entrada alemana se construyó como:
+
+\begin{verbatim}
+BOS + texto_aleman + EOS
+\end{verbatim}
+
+Luego, el modelo E2D2 generó la continuación en inglés. Para cada traducción se midió tiempo, número de tokens generados, tokens por segundo y texto resultante. También se exportaron archivos CSV con resultados por configuración y análisis cualitativo.
+
+El notebook final documentado contiene comentarios en las líneas importantes del código: carga de dependencias, selección de dispositivo, carga del checkpoint, construcción del prompt, generación E2D2, métricas, ablación, baseline OPUS-MT y exportación de resultados.
+
+\section{Resultados}
+
+\subsection{Ablation Study de E2D2}
+
+La Tabla \ref{tab:ablation} muestra los resultados de las configuraciones E2D2 evaluadas. La configuración oficial del checkpoint fue la más equilibrada.
+
+\begin{table*}[htbp]
+\caption{Ablation study de E2D2 sobre 30 ejemplos WMT14 de-en}
+\label{tab:ablation}
+\centering
+\begin{tabular}{lrrrrrr}
+\toprule
+\textbf{Configuración} & \textbf{BLEU} & \textbf{chrF} & \textbf{Tiempo (s)} & \textbf{Tokens/s} & \textbf{Tokens gen.} & \textbf{Rep. bigrama} \\
+\midrule
+E2D2 b2/s2 cache & 0.00 & 0.31 & 0.140 & 15.75 & 2.00 & 0.033 \\
+E2D2 b4/s4 cache & 17.85 & 50.00 & 1.066 & 37.24 & 36.53 & 0.092 \\
+E2D2 b8/s8 cache & 10.13 & 45.65 & 0.950 & 71.03 & 65.87 & 0.240 \\
+E2D2 b4/s4 no-cache & -- & -- & -- & -- & -- & -- \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+La configuración \texttt{b2/s2} generó salidas demasiado cortas, con apenas dos tokens en promedio. La configuración \texttt{b8/s8} aumentó los tokens por segundo, pero deterioró BLEU y elevó la repetición. La ruta \texttt{use\_cache=False} falló en todos los ejemplos con un error de dimensiones, por lo que se reporta como limitación técnica de esta implementación y no como resultado competitivo.
+
+\subsection{Comparación Extendida con OPUS-MT}
+
+La Tabla \ref{tab:comparacion} compara E2D2 con el baseline autoregresivo OPUS-MT sobre 150 ejemplos del conjunto de prueba WMT14 de-en. Esta comparación extendida se usa como resultado principal de evaluación, mientras que la Tabla \ref{tab:ablation} se mantiene como estudio de sensibilidad de parámetros.
+
+\begin{table*}[htbp]
+\caption{Comparación extendida entre E2D2 y baseline autoregresivo sobre 150 ejemplos}
+\label{tab:comparacion}
+\centering
+\begin{tabular}{lrrrrr}
+\toprule
+\textbf{Modelo} & \textbf{BLEU} & \textbf{chrF} & \textbf{Tiempo (s)} & \textbf{Tokens/s} & \textbf{Rep. bigrama} \\
+\midrule
+E2D2 b4/s4 cache & 16.53 & 49.66 & 0.706 & 50.32 & 0.077 \\
+OPUS-MT autoregresivo & 25.02 & 54.09 & 0.189 & 144.68 & 0.005 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+En esta muestra extendida, OPUS-MT supera a E2D2 en calidad automática y velocidad. Esto no invalida E2D2 como objeto de estudio, ya que el propósito principal del proyecto es comprender e implementar una arquitectura encoder--decoder de difusión discreta con pesos preentrenados. La comparación permite discutir diferencias arquitectónicas: OPUS-MT es un traductor autoregresivo especializado, mientras E2D2 genera mediante refinamiento discreto por bloques.
+
+\section{Análisis Cualitativo}
+
+El análisis cualitativo muestra que E2D2 puede generar traducciones razonables, pero también presenta errores de repetición y continuaciones no justificadas. Por ejemplo, para la frase alemana:
+
+\begin{quote}
+\emph{Pro Fahrtrichtung gibt es drei Lichtanlagen.}
+\end{quote}
+
+La referencia es:
+
+\begin{quote}
+\emph{There are three sets of lights per direction of travel.}
+\end{quote}
+
+E2D2 produjo:
+
+\begin{quote}
+\emph{There are three light systems per direction. The car is 100 m long and 100 m long...}
+\end{quote}
+
+OPUS-MT produjo:
+
+\begin{quote}
+\emph{There are three lighting systems per direction of travel.}
+\end{quote}
+
+Este caso evidencia una limitación práctica del sampling E2D2 en esta configuración: el modelo puede traducir correctamente el inicio, pero luego extenderse con contenido repetitivo o ajeno a la fuente. Por ello se incluyó una métrica simple de repetición de bigramas.
+
+\section{Discusión}
+
+Los resultados confirman que la configuración oficial de E2D2-WMT es la más razonable dentro de las variantes evaluadas. La reducción de \texttt{block\_size} a 2 produce generación insuficiente, mientras que aumentarlo a 8 incrementa la longitud y la repetición. Esto es coherente con el trade-off reportado en el paper: el tamaño de bloque afecta calidad, velocidad y frecuencia con la que se actualiza el contexto.
+
+La comparación con OPUS-MT muestra que un modelo autoregresivo especializado puede ser más fuerte en una evaluación acotada de traducción. Sin embargo, el interés de E2D2 no está en reemplazar directamente a todos los traductores autoregresivos, sino en explorar una arquitectura alternativa donde la generación se formula como denoising discreto. Esta perspectiva es relevante para estudiar nuevas formas de paralelización y eficiencia en modelos de lenguaje.
+
+\section{Limitaciones}
+
+Las principales limitaciones del proyecto son:
+
+\begin{itemize}
+    \item Las ablaciones se ejecutan sobre una muestra reducida para controlar el tiempo de cómputo en Colab; la comparación principal E2D2 vs. OPUS-MT se ejecutó sobre 150 ejemplos.
+    \item No se reproduce el entrenamiento desde cero porque la consigna prioriza inferencia con pesos preentrenados y análisis arquitectónico; entrenar E2D2-WMT excede los recursos razonables de Colab.
+    \item El baseline OPUS-MT es más pequeño pero altamente especializado para traducción.
+    \item Las métricas automáticas en muestras acotadas pueden variar y deben complementarse con análisis cualitativo.
+\end{itemize}
+
+\section{Conclusiones}
+
+El proyecto implementó exitosamente inferencia con E2D2, una arquitectura Transformer encoder--decoder de difusión discreta aplicada a traducción automática. Se verificó internamente la estructura del checkpoint, confirmando un encoder de 28 capas y un decoder de 4 capas, con 331.8M parámetros. La configuración oficial \texttt{block\_size=4}, \texttt{num\_steps=4} y caché activado fue la variante E2D2 más equilibrada. La comparación con OPUS-MT mostró que el baseline autoregresivo fue superior en esta muestra, pero también permitió contextualizar las fortalezas y debilidades de la generación por difusión discreta.
+
+En conjunto, la entrega cumple la consigna: se basa en un paper científico, usa código y pesos preentrenados disponibles, no entrena desde cero, implementa inferencia, trabaja con datos secuenciales complejos y explica en profundidad el funcionamiento de una arquitectura Transformer encoder--decoder.
+
+\bibliographystyle{IEEEtran}
+\bibliography{Informe_E2D2_IEEE}
+
+\end{document}
