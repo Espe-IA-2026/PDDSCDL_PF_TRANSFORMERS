@@ -65,7 +65,7 @@ h1.hero-h{font-size:clamp(2.8rem,7vw,5.5rem);font-weight:900;line-height:1.05;ma
 .sec{padding:5rem 2rem;max-width:1180px;margin:0 auto}
 .sec-label{font-size:.72rem;text-transform:uppercase;letter-spacing:3px;color:var(--cyan);margin-bottom:.4rem}
 .sec-title{font-size:clamp(1.8rem,4vw,2.7rem);font-weight:800;margin-bottom:.9rem}
-.sec-desc{color:var(--t2);max-width:620px;margin-bottom:2.8rem;font-size:.95rem}
+.sec-desc{color:var(--t2);max-width:640px;margin-bottom:2.8rem;font-size:.95rem}
 .divider{height:1px;background:linear-gradient(to right,transparent,rgba(0,212,255,.12),transparent);margin:0}
 
 /* CARDS */
@@ -102,7 +102,6 @@ code{background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.2);border-ra
 .tok-row{display:flex;gap:.35rem;flex-wrap:wrap;margin:.7rem 0}
 .tok{background:rgba(0,212,255,.09);border:1px solid rgba(0,212,255,.28);border-radius:5px;padding:.25rem .55rem;font-family:'Courier New',monospace;font-size:.78rem;color:var(--cyan)}
 .tok.sp{background:rgba(139,92,246,.09);border-color:rgba(139,92,246,.3);color:var(--purple)}
-.tok.msk{background:rgba(245,158,11,.09);border-color:rgba(245,158,11,.3);color:var(--orange)}
 .tok.out{background:rgba(16,185,129,.09);border-color:rgba(16,185,129,.3);color:var(--green)}
 
 /* QKV */
@@ -113,9 +112,7 @@ code{background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.2);border-ra
 .qkv.Q{background:linear-gradient(145deg,rgba(245,158,11,.1),rgba(245,158,11,.02));border:1px solid rgba(245,158,11,.3)}
 .qkv.K{background:linear-gradient(145deg,rgba(0,212,255,.1),rgba(0,212,255,.02));border:1px solid rgba(0,212,255,.3)}
 .qkv.V{background:linear-gradient(145deg,rgba(139,92,246,.1),rgba(139,92,246,.02));border:1px solid rgba(139,92,246,.3)}
-.qkv.Q::before{background:var(--orange)}
-.qkv.K::before{background:var(--cyan)}
-.qkv.V::before{background:var(--purple)}
+.qkv.Q::before{background:var(--orange)}.qkv.K::before{background:var(--cyan)}.qkv.V::before{background:var(--purple)}
 .qkv.Q:hover{box-shadow:0 10px 35px rgba(245,158,11,.2);transform:translateY(-4px)}
 .qkv.K:hover{box-shadow:0 10px 35px rgba(0,212,255,.2);transform:translateY(-4px)}
 .qkv.V:hover{box-shadow:0 10px 35px rgba(139,92,246,.2);transform:translateY(-4px)}
@@ -129,7 +126,7 @@ code{background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.2);border-ra
 .qd .em{font-weight:600}
 .Q .qd .em{color:var(--orange)}.K .qd .em{color:var(--cyan)}.V .qd .em{color:var(--purple)}
 
-/* FORMULA BOX */
+/* FORMULA */
 .fbox{background:var(--gcard);border:1px solid var(--border);border-radius:16px;padding:2rem;text-align:center;margin:1.8rem 0}
 .fbox-lbl{font-size:.7rem;text-transform:uppercase;letter-spacing:2.5px;color:var(--t3);margin-bottom:1rem}
 .fmain{font-family:'Courier New',monospace;font-size:clamp(.82rem,2.2vw,1.1rem);background:rgba(0,0,0,.45);padding:1rem 2rem;border-radius:11px;display:inline-block;margin-bottom:1rem;line-height:1.8}
@@ -187,49 +184,28 @@ code{background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.2);border-ra
 .tbtn:hover{color:var(--t1)}
 .tpanel{display:none}.tpanel.on{display:block}
 
-/* TIMELINE */
-.tl{position:relative;padding-left:2rem}
-.tl::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--cyan),var(--purple))}
-.tli{position:relative;margin-bottom:2.2rem;padding-left:1.5rem}
-.tldot{position:absolute;left:-2.4rem;top:.35rem;width:11px;height:11px;border-radius:50%;border:2px solid var(--cyan);background:var(--bg)}
-.tldot.p{border-color:var(--purple)}
-.tlt{font-size:.72rem;color:var(--cyan);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:.2rem}
-.tlt.p{color:var(--purple)}
-.tls{font-size:1rem;font-weight:700;margin-bottom:.6rem}
-.tlc{background:var(--gcard);border:1px solid var(--border);border-radius:12px;padding:1rem 1.2rem}
-.tltp{font-size:.88rem;font-weight:600;margin-bottom:.5rem}
-.tlul{list-style:none;font-size:.82rem;color:var(--t2)}
-.tlul li::before{content:'→ ';color:var(--cyan)}
-.tlul li{margin-bottom:.2rem}
-
-/* FAQ */
-.faq-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-top:1.8rem}
-.faq{background:var(--gcard);border:1px solid var(--border);border-radius:12px;overflow:hidden}
-.faq-h{padding:.9rem 1.1rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;transition:background .2s;font-size:.87rem;font-weight:600}
-.faq-h:hover{background:rgba(0,212,255,.04)}
-.faq-toggle{color:var(--cyan);flex-shrink:0;font-size:1.2rem;transition:transform .3s;line-height:1}
-.faq.open .faq-toggle{transform:rotate(45deg)}
-.faq-body{display:none;padding:.9rem 1.1rem;font-size:.83rem;color:var(--t2);border-top:1px solid var(--border);line-height:1.7}
-.faq.open .faq-body{display:block}
-
-/* FOOTER */
-footer{background:var(--bg2);border-top:1px solid var(--border);padding:2.5rem 2rem;text-align:center;color:var(--t3);font-size:.83rem}
-.ft{font-size:.95rem;font-weight:600;color:var(--t2);margin-bottom:.4rem}
-.links-row{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;margin:.8rem 0}
-.links-row a{color:var(--cyan);font-size:.8rem}
+/* ARCH */
+.arch-wrap{background:var(--gcard);border:1px solid var(--border);border-radius:18px;padding:2rem;margin-bottom:2rem;text-align:center}
+.arch-img{max-width:560px;width:100%;border-radius:12px;margin-bottom:1.2rem;border:1px solid var(--border)}
+.arch-cap{font-size:.83rem;color:var(--t2);max-width:680px;margin:0 auto;line-height:1.7}
+.comp-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.algo-box{font-family:'Courier New',monospace;font-size:.78rem;color:var(--t2);line-height:2.1;background:rgba(0,0,0,.35);padding:.9rem 1.1rem;border-radius:10px}
+.al{color:var(--t3)}.enc{color:var(--cyan)}.dec{color:var(--green)}.kw{color:var(--t1)}
+.flop-tbl{width:100%;border-collapse:collapse;font-size:.85rem;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:1rem}
+.flop-tbl th{background:rgba(0,0,0,.35);padding:.65rem 1rem;font-size:.75rem;text-transform:uppercase;letter-spacing:.5px;color:var(--t2);font-weight:600;border-bottom:1px solid var(--border);text-align:left}
+.flop-tbl td{padding:.65rem 1rem;border-bottom:1px solid rgba(30,58,95,.18);color:var(--t2)}
+.flop-tbl td:first-child{color:var(--t1);font-weight:600}
+.flop-tbl tr.hi td{background:rgba(0,212,255,.05)}
+.flop-tbl tr:last-child td{border-bottom:none}
 
 /* ANIMATIONS */
-@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
 .reveal.in{opacity:1;transform:translateY(0)}
 
 /* MASK GRID */
-.mask-grid{display:grid;gap:3px;margin:1.2rem auto;max-width:320px}
-.mg-cell{width:28px;height:28px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;transition:background .5s,color .5s}
+.mg-cell{width:28px;height:28px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700}
 .mg-cell.attend{background:rgba(0,212,255,.2);color:var(--cyan);border:1px solid rgba(0,212,255,.4)}
 .mg-cell.self{background:rgba(139,92,246,.2);color:var(--purple);border:1px solid rgba(139,92,246,.4)}
-.mg-cell.block{background:rgba(245,158,11,.15);color:var(--orange);border:1px solid rgba(245,158,11,.3)}
-.mg-cell.empty{background:rgba(255,255,255,.03);color:transparent;border:1px solid rgba(255,255,255,.04)}
 .mg-label{font-size:.65rem;color:var(--t3);text-align:center;margin-bottom:.3rem}
 </style>
 </head>
@@ -240,11 +216,11 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2.5rem 2
   <div class="nav-logo">E2D2</div>
   <ul class="nav-links">
     <li><a href="#proyecto">Proyecto</a></li>
+    <li><a href="#arquitectura">Arquitectura</a></li>
     <li><a href="#io">Entradas/Salidas</a></li>
     <li><a href="#qkv">Q · K · V</a></li>
     <li><a href="#difusion">Difusión</a></li>
     <li><a href="#resultados">Resultados</a></li>
-    <li><a href="#guion">Guión</a></li>
   </ul>
   <span class="nav-pill">WMT14 De→En</span>
 </nav>
@@ -268,8 +244,8 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2.5rem 2
       hasta obtener una <strong>traducción coherente</strong>.
     </p>
     <div class="cta-row">
-      <a href="#qkv" class="btn btn-p">Explorar Q · K · V</a>
-      <a href="#difusion" class="btn btn-s">Ver Difusión en Acción</a>
+      <a href="#arquitectura" class="btn btn-p">Ver Arquitectura</a>
+      <a href="#qkv" class="btn btn-s">Explorar Q · K · V</a>
     </div>
     <div class="hero-stats">
       <div class="stat">
@@ -281,12 +257,12 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2.5rem 2
         <div class="stat-l">Capas Decoder</div>
       </div>
       <div class="stat">
-        <div class="stat-v">block_size=4</div>
-        <div class="stat-l">Tokens por bloque</div>
+        <div class="stat-v">NeurIPS</div>
+        <div class="stat-l">2025</div>
       </div>
       <div class="stat">
         <div class="stat-v">16.53</div>
-        <div class="stat-l">BLEU (150 ejemplos)</div>
+        <div class="stat-l">BLEU (150 ej.)</div>
       </div>
     </div>
   </div>
@@ -354,6 +330,182 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2.5rem 2
 
 <div class="divider"></div>
 
+<!-- ARQUITECTURA -->
+<section class="sec" id="arquitectura">
+  <div class="sec-label">Del Paper · NeurIPS 2025</div>
+  <h2 class="sec-title">Arquitectura E2D2</h2>
+  <p class="sec-desc">
+    La intuición clave: los modelos de difusión anteriores mezclaban dos tareas en un único decoder-only.
+    E2D2 las separa en dos módulos especializados — reduciendo el costo computacional a la mitad.
+  </p>
+
+  <!-- Imagen de arquitectura -->
+  <div class="arch-wrap reveal">
+    <img src="Insumos/Arquitecture.PNG" class="arch-img" alt="Arquitectura E2D2 del paper">
+    <div class="arch-cap">
+      <strong style="color:var(--cyan)">Figura 1 del paper (NeurIPS 2025) —</strong>
+      El <strong>Large Encoder</strong> procesa el prompt y los tokens ya generados (limpios).
+      El <strong>Small Decoder</strong> denoisa el bloque ruidoso usando esas representaciones vía cross-attention.
+      Los pasos de denoising producen nuevos tokens <em>sin invocar el encoder</em> — la clave de la eficiencia.
+    </div>
+  </div>
+
+  <!-- Insight central -->
+  <div class="hbox info reveal" style="margin-bottom:2.2rem">
+    <strong>Insight central del paper:</strong>
+    <p>Los modelos de difusión realizan dos tipos de cómputo: (1) representar tokens limpios y
+    (2) denoising de tokens ruidosos. Los modelos decoder-only los mezclan, obligando a invocar
+    la red completa en cada paso de denoising. E2D2 usa módulos separados —
+    permitiendo reutilizar las representaciones del encoder en múltiples pasos baratos con el decoder.</p>
+  </div>
+
+  <!-- Dos componentes -->
+  <h3 style="margin-bottom:1.2rem;font-size:1.1rem;font-weight:700">Los Dos Componentes</h3>
+  <div class="g2" style="margin-bottom:2rem">
+    <div class="card reveal" style="border-top:3px solid var(--cyan)">
+      <div style="display:flex;align-items:center;gap:.9rem;margin-bottom:1.1rem">
+        <div class="comp-icon" style="background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.3)">🔵</div>
+        <div>
+          <div style="font-weight:800;font-size:1.05rem">Large Encoder</div>
+          <div style="font-size:.72rem;color:var(--cyan);text-transform:uppercase;letter-spacing:1px">N<sub>Enc</sub> capas Transformer · WMT: <strong>28 capas</strong></div>
+        </div>
+      </div>
+      <div style="font-size:.87rem;color:var(--t2);line-height:1.9">
+        <strong style="color:var(--t1)">Entrada:</strong> tokens limpios x<sub>t,Enc</sub> — prompt + tokens acumulados generados<br>
+        <strong style="color:var(--t1)">Salida:</strong> <code>h<sub>t</sub> = ENCODER(x<sub>t,Enc</sub>)</code><br>
+        <strong style="color:var(--t1)">Atención:</strong> bidireccional con máscara block-causal M<sub>enc</sub><br>
+        <strong style="color:var(--t1)">Frecuencia:</strong> 1 vez por bloque (luego se cachea KV)<br>
+        <strong style="color:var(--t1)">Propósito:</strong> construir representaciones ricas y contextuales
+      </div>
+    </div>
+    <div class="card reveal" style="border-top:3px solid var(--green)">
+      <div style="display:flex;align-items:center;gap:.9rem;margin-bottom:1.1rem">
+        <div class="comp-icon" style="background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3)">🟢</div>
+        <div>
+          <div style="font-weight:800;font-size:1.05rem">Small Decoder</div>
+          <div style="font-size:.72rem;color:var(--green);text-transform:uppercase;letter-spacing:1px">N<sub>Dec</sub> capas Transformer · WMT: <strong>4 capas</strong></div>
+        </div>
+      </div>
+      <div style="font-size:.87rem;color:var(--t2);line-height:1.9">
+        <strong style="color:var(--t1)">Entrada:</strong> tokens ruidosos z<sub>t,Dec</sub> — bloque activo enmascarado<br>
+        <strong style="color:var(--t1)">Salida:</strong> <code>x<sub>logit</sub> = DECODER(z<sub>t,Dec</sub>, h<sub>t</sub>)</code><br>
+        <strong style="color:var(--t1)">Atención:</strong> fused kernel (self-attn + cross-attn, una sola op.)<br>
+        <strong style="color:var(--t1)">Frecuencia:</strong> <code>num_steps</code> veces por bloque (barato)<br>
+        <strong style="color:var(--t1)">Propósito:</strong> refinar iterativamente el bloque hacia tokens coherentes
+      </div>
+    </div>
+  </div>
+
+  <!-- Decisiones de diseño -->
+  <h3 style="margin-bottom:1.2rem;font-size:1.1rem;font-weight:700">Decisiones de Diseño</h3>
+  <div class="g3" style="margin-bottom:2rem">
+    <div class="card reveal" style="border-left:3px solid var(--cyan)">
+      <div class="ct" style="margin-bottom:.6rem">⚡ Fused Attention Kernel</div>
+      <div class="cd">
+        Una sola llamada de atención atiende simultáneamente las representaciones del encoder h<sub>t</sub>
+        (cross-attention) y los estados del decoder z<sub>t,Dec</sub> (self-attention).
+        Reduce overhead vs. T5 que usa dos operaciones separadas.
+        <br><br>Keys + Values concatenados: <code>h<sub>t</sub>[j] ⊕ KV<sub>Dec</sub>[i]</code>
+      </div>
+    </div>
+    <div class="card reveal" style="border-left:3px solid var(--purple)">
+      <div class="ct" style="margin-bottom:.6rem">🔗 Last Hidden State <span style="font-size:.72rem;color:var(--t3);font-weight:400">(desde cero)</span></div>
+      <div class="cd">
+        Salida final del encoder h<sub>t</sub> = g<sub>N_Enc</sub> se concatena con el input de cada capa del decoder:
+        <code>h<sub>t</sub> ⊕ f<sub>i-1</sub></code>.
+        <br><br>
+        <strong style="color:var(--purple)">Usado en:</strong> WMT14 y CNN/DailyMail entrenados desde cero.
+      </div>
+    </div>
+    <div class="card reveal" style="border-left:3px solid var(--orange)">
+      <div class="ct" style="margin-bottom:.6rem">🗂 Shared KV Cache <span style="font-size:.72rem;color:var(--t3);font-weight:400">(fine-tuning)</span></div>
+      <div class="cd">
+        La i-ésima capa del decoder reutiliza los KVs de la j-ésima capa del encoder.
+        Facilita fine-tuning desde Qwen3 preentrenado sin degradar la estabilidad de cross-attention.
+        <br><br>
+        <strong style="color:var(--orange)">Usado en:</strong> GSM8K (razonamiento matemático).
+      </div>
+    </div>
+  </div>
+
+  <!-- Algoritmos -->
+  <h3 style="margin-bottom:1.2rem;font-size:1.1rem;font-weight:700">Algoritmos: Entrenamiento e Inferencia</h3>
+  <div class="g2" style="margin-bottom:2rem">
+    <div class="card reveal">
+      <div style="font-size:.75rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--cyan);margin-bottom:.8rem;font-weight:700">Algoritmo 2 · Entrenamiento</div>
+      <div class="algo-box">
+        <span class="al">1.</span> <span class="kw">Muestrear</span> t ~ U[0,1]<br>
+        <span class="al">2.</span> <span class="kw">Corromper</span> z<sub>t</sub> ~ q<sub>t</sub>(·|x<sup>1:L</sup>)<br>
+        <span class="al">3.</span> <span class="enc">h<sup>1:L</sup></span> ← ENCODER(x<sup>1:L</sup>, M<sub>enc</sub>)<br>
+        <span class="al">4.</span> <span class="dec">x<sub>logit</sub></span> ← DECODER(z<sub>t</sub><sup>1:L</sup>, h<sup>1:L</sup>, M<sub>dec</sub>)<br>
+        <span class="al">5.</span> <span class="kw">Gradiente</span> ∇<sub>θ,φ</sub> L(x<sub>logit</sub>; θ, φ)
+      </div>
+      <div style="font-size:.8rem;color:var(--t2);margin-top:.8rem;line-height:1.6">
+        Un solo pase del encoder + un solo pase del decoder sobre toda la secuencia.
+        <strong style="color:var(--cyan)">2× menos FLOPs</strong> que BD3LM con el mismo N total de capas.
+      </div>
+    </div>
+    <div class="card reveal">
+      <div style="font-size:.75rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--green);margin-bottom:.8rem;font-weight:700">Algoritmo 1 · Inferencia con KV Caching</div>
+      <div class="algo-box">
+        <span class="al">1.</span> x, KV ← ∅, ∅<br>
+        <span class="al">2.</span> <span class="enc">h</span>, KV ← ENCODER(prompt, ∅)<br>
+        <span class="al">3.</span> <span class="kw">para</span> b = 1..B (<span class="kw">bloques</span>):<br>
+        <span class="al">4.</span> &nbsp;&nbsp;z<sub>t</sub><sup>b</sup> ← [MASK, MASK, MASK, MASK]<br>
+        <span class="al">5.</span> &nbsp;&nbsp;<span class="kw">para</span> t = T-1/T ... 1/T:<br>
+        <span class="al">6.</span> &nbsp;&nbsp;&nbsp;&nbsp;z<sub>t</sub><sup>b</sup> ← <span class="dec">DECODER</span>(z<sub>t</sub><sup>b</sup>, h)<br>
+        <span class="al">7.</span> &nbsp;&nbsp;<span class="enc">h</span>, KV<sup>b</sup> ← ENCODER(x<sup>b</sup>, KV<sup>&lt;b</sup>)<br>
+        <span class="al">8.</span> &nbsp;&nbsp;KV ← KV<sup>&lt;b</sup> ⊕ KV<sup>b</sup>
+      </div>
+      <div style="font-size:.8rem;color:var(--t2);margin-top:.8rem;line-height:1.6">
+        Decoder llamado <code>num_steps</code> veces por bloque (barato).
+        Encoder llamado <strong>1 vez por bloque</strong>, con KV cache acumulado.
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOPs -->
+  <h3 style="margin-bottom:.8rem;font-size:1.1rem;font-weight:700">FLOPs de Inferencia — ¿Por qué E2D2 es más eficiente?</h3>
+  <table class="flop-tbl reveal">
+    <thead>
+      <tr>
+        <th>Modelo</th>
+        <th>FLOPs de Inferencia</th>
+        <th>Descripción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>AR (OPUS-MT)</td>
+        <td><code>L · O(θ)</code></td>
+        <td style="font-size:.82rem;color:var(--t3)">Una llamada al modelo completo por cada token</td>
+      </tr>
+      <tr>
+        <td>BD3LM (decoder-only)</td>
+        <td><code>BT · O(θ)</code></td>
+        <td style="font-size:.82rem;color:var(--t3)">Red completa en cada paso de denoising</td>
+      </tr>
+      <tr class="hi">
+        <td><strong>E2D2 (Ours)</strong></td>
+        <td><code>B·O(φ) + BT·O(θ)</code></td>
+        <td style="font-size:.82rem">Encoder grande O(φ) solo 1x/bloque; decoder pequeño O(θ) T veces/bloque</td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="font-size:.79rem;color:var(--t3);margin-top:.5rem;text-align:center">
+    φ = costo encoder · θ = costo decoder (θ ≪ φ) · T = num_steps · B = n° bloques · L = largo de secuencia
+  </div>
+
+  <div class="hbox ok reveal" style="margin-top:1.8rem">
+    <strong>Resultados del paper en WMT14 De→En (H100 80GB):</strong>
+    <p>E2D2 (28/4 capas) logra <strong>24.8 BLEU a 160 tokens/s</strong>.
+    El mejor BD3LM (16 capas) logra 24.0 BLEU a solo 102.4 tokens/s.
+    E2D2 extiende el Pareto frontier: más calidad <em>y</em> más throughput simultáneamente.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <!-- ENTRADAS Y SALIDAS -->
 <section class="sec" id="io">
   <div class="sec-label">Flujo de Datos</div>
@@ -398,7 +550,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2.5rem 2
       <div class="io-step">
         <div class="io-icon">🔤</div>
         <div class="io-lbl">Decodificación</div>
-        <div class="io-val">extraer solo tokens nuevos, strip especiales</div>
+        <div class="io-val">extraer tokens nuevos, strip especiales</div>
       </div>
       <div class="io-arr">→</div>
       <div class="io-step" style="border-color:rgba(16,185,129,.4);background:rgba(16,185,129,.04)">
@@ -468,7 +620,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2.5rem 2
         </div>
       </div>
       <div>
-        <div style="font-size:.75rem;color:var(--t3);margin-bottom:.45rem">Métricas de inferencia (config oficial, 150 ej.):</div>
+        <div style="font-size:.75rem;color:var(--t3);margin-bottom:.45rem">Métricas (config oficial, 150 ej.):</div>
         <div style="font-size:.85rem;color:var(--t2);line-height:2">
           ⏱ Tiempo promedio: <strong style="color:var(--t1)">0.706 s</strong><br>
           ⚡ Throughput: <strong style="color:var(--t1)">50.32 tokens/s</strong><br>
@@ -492,65 +644,51 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2.5rem 2
   </p>
 
   <div class="qkv-grid">
-    <!-- QUERY -->
     <div class="qkv Q reveal">
       <div class="ql">Q</div>
       <div class="qn">Query &mdash; "¿Qué necesito?"</div>
-      <div class="qf">
-        <span class="fh">Q</span> = z_bloque_activo &times; W<sub>Q</sub>
-      </div>
+      <div class="qf"><span class="fh">Q</span> = z_bloque_activo &times; W<sub>Q</sub></div>
       <div class="qshape">📐 [batch, block_size, d_model] = [1, 4, d]</div>
       <div class="qd">
         Proviene del <span class="em">decoder</span>. Son las representaciones de los
         <code>block_size=4</code> tokens que están siendo refinados ahora mismo.
-        Estos tokens están en estado <span class="em">ruidoso / parcialmente enmascarado</span>
-        — no son tokens definitivos aún.<br><br>
-        <span style="font-size:.8rem;color:var(--orange)">⚡ Diferencia clave con OPUS-MT:</span>
+        Estos tokens están en estado <span class="em">ruidoso / enmascarado</span>.<br><br>
+        <span style="font-size:.8rem;color:var(--orange)">⚡ Diferencia clave:</span>
         <span style="font-size:.82rem;color:var(--t2)"> en OPUS-MT Q es el último token
-        definitivo (certeza total). En E2D2, Q es <em>incertidumbre que busca certeza</em>
-        y se usa <code>num_steps</code> veces por bloque.</span>
+        definitivo. En E2D2, Q es <em>incertidumbre que busca certeza</em>
+        y se aplica <code>num_steps</code> veces por bloque.</span>
       </div>
     </div>
 
-    <!-- KEY -->
     <div class="qkv K reveal">
       <div class="ql">K</div>
       <div class="qn">Key &mdash; "¿De qué hablo?"</div>
-      <div class="qf">
-        <span class="fh">K</span> = H_encoder &times; W<sub>K</sub>
-      </div>
+      <div class="qf"><span class="fh">K</span> = H_encoder &times; W<sub>K</sub></div>
       <div class="qshape">📐 [batch, L_src, d_model]</div>
       <div class="qd">
         Proviene del <span class="em">encoder</span> (28 capas Transformer).
-        Representa la "firma" de cada token alemán: qué ofrece como contexto,
-        qué tan relevante es para cada posición del decoder.<br><br>
-        El encoder es <span class="em">bidireccional</span> — cada Key contiene
-        contexto de toda la oración alemana, no solo del prefijo. Esto contrasta
-        con el decoder, que es causal.
+        Representa la "firma" de cada token alemán — qué ofrece como contexto.<br><br>
+        El encoder es <span class="em">bidireccional</span>: cada Key contiene
+        contexto de toda la oración alemana, no solo del prefijo.
       </div>
     </div>
 
-    <!-- VALUE -->
     <div class="qkv V reveal">
       <div class="ql">V</div>
       <div class="qn">Value &mdash; "¿Qué aporto?"</div>
-      <div class="qf">
-        <span class="fh">V</span> = H_encoder &times; W<sub>V</sub>
-      </div>
+      <div class="qf"><span class="fh">V</span> = H_encoder &times; W<sub>V</sub></div>
       <div class="qshape">📐 [batch, L_src, d_v]</div>
       <div class="qd">
         También del <span class="em">encoder</span>.
         Es la información semántica real que se transfiere al decoder cuando la
         similitud Query·Key es alta.<br><br>
-        Las Keys miden <em>compatibilidad</em>. Los Values entregan <em>contenido</em>.
-        Son proyecciones lineales independientes del mismo H_encoder:<br>
-        <code style="font-size:.76rem">tie_encoder_decoder_weights = False</code>
-        (confirmado celda 29 del notebook).
+        Keys miden <em>compatibilidad</em>. Values entregan <em>contenido</em>.
+        Proyecciones independientes de H_encoder:
+        <code style="font-size:.76rem">tie_enc_dec_weights=False</code>.
       </div>
     </div>
   </div>
 
-  <!-- FORMULA -->
   <div class="fbox reveal">
     <div class="fbox-lbl">Fórmula Scaled Dot-Product Cross-Attention</div>
     <div class="fmain">
@@ -564,34 +702,28 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2.5rem 2
       Resultado: <code>[batch, block_size, d_v]</code> &mdash;
       un vector enriquecido con contexto alemán para cada uno de los
       <strong>4 tokens del bloque activo</strong>.
-      Esto ocurre <code>num_steps = 4</code> veces antes de que el bloque quede fijo.
+      Esto ocurre <code>num_steps=4</code> veces antes de que el bloque quede fijo.
     </div>
   </div>
 
-  <!-- MASK VISUALIZATION -->
   <div class="card reveal" style="margin-bottom:1.8rem">
     <div class="ct" style="margin-bottom:.5rem">Máscara de Atención Block-Causal</div>
     <div class="cd" style="margin-bottom:1rem">
-      Visualización simplificada: columnas <code>h*</code> = tokens del encoder (K,V),
-      columnas <code>z*</code> = tokens del bloque activo (self-attention).
-      El token activo atiende a todos los <code>h*</code> (cross-attention) y
-      a todos los <code>z*</code> del mismo bloque.
+      Columnas <code>h*</code> = tokens del encoder (origen de K,V — cross-attention).
+      Columnas <code>z*</code> = tokens del bloque activo (self-attention intra-bloque sin restricción).
     </div>
     <div style="overflow-x:auto">
-      <div style="display:inline-block;min-width:280px">
+      <div style="display:inline-block">
         <div class="mg-label">← h* encoder (K,V) → &nbsp; ← z* bloque activo →</div>
-        <div id="mask-grid" style="display:grid;grid-template-columns:repeat(8,28px);gap:3px;margin:0 auto;width:fit-content">
-        </div>
+        <div id="mask-grid" style="display:grid;grid-template-columns:repeat(8,28px);gap:3px;margin:0 auto;width:fit-content"></div>
         <div style="display:flex;gap:1.2rem;justify-content:center;margin-top:.8rem;flex-wrap:wrap">
           <span style="font-size:.72rem;color:var(--cyan)">■ Cross-attention (Q→K,V)</span>
           <span style="font-size:.72rem;color:var(--purple)">■ Self-attention intra-bloque</span>
-          <span style="font-size:.72rem;color:var(--t3)">□ No atención (futuro)</span>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- COMPARISON TABLE -->
   <h3 style="margin-bottom:1rem;font-size:1.05rem;font-weight:700">E2D2 vs. Transformer Autoregresivo Clásico</h3>
   <table class="ctbl reveal">
     <thead>
@@ -615,7 +747,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2.5rem 2
       <tr>
         <td>Origen de K, V</td>
         <td>Encoder (representaciones limpias)</td>
-        <td>Encoder 28 capas bidireccional (representaciones más ricas)</td>
+        <td>Encoder 28 capas bidireccional</td>
       </tr>
       <tr>
         <td>Veces que se ejecuta cross-attn</td>
@@ -625,21 +757,21 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2.5rem 2
       <tr>
         <td>Máscara de atención</td>
         <td>Triangular inferior (causal)</td>
-        <td>Block-causal (bloques anteriores + intra-bloque libre)</td>
+        <td>Block-causal + intra-bloque libre</td>
       </tr>
       <tr>
-        <td>Pesos encoder ↔ decoder compartidos</td>
+        <td>Pesos encoder ↔ decoder</td>
         <td>Depende del modelo</td>
-        <td>No — <code>tie_encoder_decoder_weights=False</code></td>
+        <td>No compartidos — <code>tie_enc_dec=False</code></td>
       </tr>
     </tbody>
   </table>
 
   <div class="hbox info reveal">
     <strong>Con <code>use_cache=True</code>:</strong>
-    <p>El encoder se ejecuta <strong>una sola vez</strong> para toda la oración alemana.
-    Las representaciones H_encoder (y por tanto K y V) se reutilizan en cada bloque
-    y en cada paso de denoising — esencial para la eficiencia computacional.</p>
+    <p>El encoder se ejecuta <strong>una sola vez</strong> para toda la oración.
+    Las representaciones H_encoder (K y V) se reutilizan en cada bloque
+    y en cada paso de denoising — esencial para la eficiencia computacional del Algoritmo 1.</p>
   </div>
 </section>
 
@@ -681,7 +813,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2.5rem 2
 
     <div class="step-desc" id="sdesc">
       Estado inicial: los 4 tokens del bloque están completamente enmascarados.
-      El decoder va a ejecutar <strong>num_steps=4</strong> iteraciones de refinamiento.
+      El decoder ejecutará <strong>num_steps=4</strong> iteraciones de refinamiento.
     </div>
 
     <div class="step-btns">
@@ -747,45 +879,32 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2.5rem 2
       <thead>
         <tr>
           <th style="text-align:left">Configuración E2D2</th>
-          <th>BLEU ↑</th>
-          <th>chrF ↑</th>
-          <th>Tiempo prom.</th>
-          <th>Tokens/s ↑</th>
-          <th>Rep. bigrama ↓</th>
+          <th>BLEU ↑</th><th>chrF ↑</th><th>Tiempo prom.</th><th>Tokens/s ↑</th><th>Rep. bigrama ↓</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>b2/s2 con cache</td>
-          <td>0.00</td>
-          <td>0.31</td>
-          <td>0.140 s</td>
-          <td>15.75</td>
-          <td>0.033</td>
+          <td>0.00</td><td>0.31</td><td>0.140 s</td><td>15.75</td><td>0.033</td>
         </tr>
         <tr class="hr">
           <td><strong>b4/s4 con cache ✓ oficial</strong></td>
           <td><strong style="color:var(--cyan)">17.85</strong></td>
           <td><strong style="color:var(--cyan)">50.00</strong></td>
-          <td>1.066 s</td>
-          <td>37.24</td>
-          <td>0.092</td>
+          <td>1.066 s</td><td>37.24</td><td>0.092</td>
         </tr>
         <tr>
           <td>b8/s8 con cache</td>
-          <td>10.13</td>
-          <td>45.65</td>
-          <td>0.950 s</td>
-          <td>71.03</td>
+          <td>10.13</td><td>45.65</td><td>0.950 s</td><td>71.03</td>
           <td><strong style="color:var(--orange)">0.240</strong></td>
         </tr>
       </tbody>
     </table>
     <div class="hbox warn">
       <strong>Limitación técnica:</strong>
-      <p>La configuración <code>use_cache=False</code> falló en todos los ejemplos:
-      <code>RuntimeError: The size of tensor a (4) must match the size of tensor b (0)</code>.
-      El cache no es solo optimización — es parte integral del diseño arquitectural del checkpoint.</p>
+      <p>La configuración <code>use_cache=False</code> falló:
+      <code>RuntimeError: tensor a (4) != tensor b (0)</code>.
+      El cache es parte integral del diseño del checkpoint, no solo una optimización.</p>
     </div>
   </div>
 
@@ -794,11 +913,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2.5rem 2
       <thead>
         <tr>
           <th style="text-align:left">Modelo / Configuración</th>
-          <th>BLEU ↑</th>
-          <th>chrF ↑</th>
-          <th>Tiempo prom.</th>
-          <th>Tokens/s ↑</th>
-          <th>Rep. bigrama ↓</th>
+          <th>BLEU ↑</th><th>chrF ↑</th><th>Tiempo prom.</th><th>Tokens/s ↑</th><th>Rep. bigrama ↓</th>
         </tr>
       </thead>
       <tbody>
@@ -806,26 +921,19 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2.5rem 2
           <td><strong>E2D2 b4/s4 cache (oficial)</strong></td>
           <td><strong style="color:var(--cyan)">16.53</strong></td>
           <td><strong style="color:var(--cyan)">49.66</strong></td>
-          <td>0.706 s</td>
-          <td>50.32</td>
-          <td>0.077</td>
+          <td>0.706 s</td><td>50.32</td><td>0.077</td>
         </tr>
         <tr>
           <td>OPUS-MT autoregresivo</td>
-          <td>25.02</td>
-          <td>54.09</td>
-          <td>0.189 s</td>
-          <td>144.68</td>
-          <td>0.005</td>
+          <td>25.02</td><td>54.09</td><td>0.189 s</td><td>144.68</td><td>0.005</td>
         </tr>
       </tbody>
     </table>
     <div class="hbox info">
       <strong>Contexto importante:</strong>
-      <p>OPUS-MT supera a E2D2 en BLEU, chrF y velocidad. Esto es <strong>esperado y no invalida el proyecto</strong>.
-      El objetivo fue implementar y analizar el <em>paradigma</em> de difusión discreta, no competir en benchmarks.
-      OPUS-MT es un modelo especializado en De→En; E2D2 fue entrenado en condiciones distintas.
-      La comparación es <strong>ilustrativa</strong>: muestra las diferencias de paradigma, no de calidad absoluta.</p>
+      <p>OPUS-MT supera a E2D2 en esta evaluación. Esto es <strong>esperado y no invalida el proyecto</strong>.
+      El objetivo fue analizar el <em>paradigma</em> de difusión discreta, no ganar un benchmark.
+      La comparación es <strong>ilustrativa</strong>: muestra diferencias de paradigma, no de calidad absoluta.</p>
     </div>
   </div>
 
@@ -836,7 +944,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2.5rem 2
       <div class="ct">Repetición de contenido</div>
       <div class="cd">
         E2D2 genera correctamente el inicio del bloque y luego repite contenido ajeno.
-        Más frecuente con <code>block_size=8</code> (repetición de bigramas: <strong style="color:var(--orange)">24%</strong>).
+        Más frecuente con <code>block_size=8</code> (rep. bigramas: <strong style="color:var(--orange)">24%</strong>).
         Causa: insuficientes pasos de refinamiento para bloques grandes.
       </div>
     </div>
@@ -844,173 +952,9 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2.5rem 2
       <div class="ci">📉</div>
       <div class="ct">Salidas cortas o vacías</div>
       <div class="cd">
-        Con <code>block_size=2</code>, los bloques no tienen suficiente ventana temporal
-        para establecer coherencia intra-bloque (<strong style="color:var(--red)">BLEU ≈ 0</strong>).
-        Ambos errores son consistentes con los límites teóricos de difusión discreta con pocos pasos.
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- GUION -->
-<section class="sec" id="guion">
-  <div class="sec-label">Sustentación</div>
-  <h2 class="sec-title">Guión · 15 Minutos</h2>
-  <p class="sec-desc">
-    Distribución de tiempo entre los 4 integrantes. Orden aleatorio:
-    <strong>Mateo → Fong → Jhonatan → Nicolás</strong>.
-    Cada sección incluye puntos clave y frases de transición.
-  </p>
-
-  <div class="tl">
-    <div class="tli">
-      <div class="tldot"></div>
-      <div class="tlt">0:00 – 3:30 min</div>
-      <div class="tls">Mateo González — Apertura + Entradas y Salidas</div>
-      <div class="tlc">
-        <div class="tltp">Presentar el equipo e introducir el proyecto. Explicar el flujo completo de datos.</div>
-        <ul class="tlul">
-          <li>E2D2 no genera token por token — usa difusión discreta en bloques paralelos</li>
-          <li>Tokenización: texto alemán → IDs con BOS/EOS → tensor [1, L_src]</li>
-          <li>Parámetros de control: block_size=4, num_steps=4, max_new_tokens=64–96</li>
-          <li>Salida: output_ids decodificados → texto en inglés + métricas (tiempo, tokens/s)</li>
-          <li>Diferencia con OPUS-MT: tokens uno a uno vs. bloques completos en paralelo</li>
-        </ul>
-        <div style="margin-top:.8rem;font-size:.8rem;background:rgba(0,212,255,.07);border-radius:8px;padding:.6rem .9rem;color:var(--cyan)">
-          → Transición: <em>"Le doy la palabra a Fong para explicar cómo ocurre esa comunicación interna."</em>
-        </div>
-      </div>
-    </div>
-
-    <div class="tli">
-      <div class="tldot"></div>
-      <div class="tlt">3:30 – 6:30 min</div>
-      <div class="tls">Jorge Luis Fong — Q, K y V en Cross-Attention</div>
-      <div class="tlc">
-        <div class="tltp">De la analogía YouTube a la implementación en E2D2.</div>
-        <ul class="tlul">
-          <li>Analogía: Q = tu búsqueda, K = títulos de videos, V = contenido real</li>
-          <li>Q del decoder: tokens ruidosos [batch, block_size, d_model] — incertidumbre buscando certeza</li>
-          <li>K del encoder: "de qué habla este token alemán" — 28 capas bidireccionales</li>
-          <li>V del encoder: la información semántica real que se transfiere</li>
-          <li>Fórmula: CrossAttn(Q,K,V) = softmax(QKᵀ/√d_k) × V</li>
-          <li>tie_encoder_decoder_weights=False (confirmado celda 29 del notebook)</li>
-        </ul>
-        <div style="margin-top:.8rem;font-size:.8rem;background:rgba(0,212,255,.07);border-radius:8px;padding:.6rem .9rem;color:var(--cyan)">
-          → Transición: <em>"Le paso la palabra a Jhonatan para explicar el proceso de difusión."</em>
-        </div>
-      </div>
-    </div>
-
-    <div class="tli">
-      <div class="tldot"></div>
-      <div class="tlt">6:30 – 9:30 min</div>
-      <div class="tls">Jhonatan Rengifo — Difusión Discreta + Block Diffusion</div>
-      <div class="tlc">
-        <div class="tltp">Del ruido gaussiano en imágenes al enmascaramiento en lenguaje.</div>
-        <ul class="tlul">
-          <li>Stable Diffusion / DALL-E 2: ruido gaussiano → imagen. Los tokens son discretos → [MASK]</li>
-          <li>Absorbing diffusion: token "destruido" = [MASK]. Denoising = recuperar el token real</li>
-          <li>Block Diffusion: [MASK]×4 → cross-attention + self-attention × num_steps → tokens fijos</li>
-          <li>4 diferencias vs. GPT: token [MASK], máscara block-causal, revisión de decisiones, asimetría encoder/decoder</li>
-          <li>use_cache=True: encoder se ejecuta una sola vez; K y V se reutilizan en todos los bloques</li>
-        </ul>
-        <div style="margin-top:.8rem;font-size:.8rem;background:rgba(0,212,255,.07);border-radius:8px;padding:.6rem .9rem;color:var(--cyan)">
-          → Transición: <em>"Le doy la palabra a Nicolás para cerrar con los resultados experimentales."</em>
-        </div>
-      </div>
-    </div>
-
-    <div class="tli">
-      <div class="tldot p"></div>
-      <div class="tlt p">9:30 – 15:00 min</div>
-      <div class="tls">Nicolás Vásquez — Resultados, Comparación y Cierre</div>
-      <div class="tlc">
-        <div class="tltp">Ablation study, comparación con OPUS-MT, errores cualitativos y reflexión final.</div>
-        <ul class="tlul">
-          <li>Config oficial b4/s4 cache: BLEU 17.85, chrF 50.00 en 30 ejemplos</li>
-          <li>b2 colapsa (BLEU ≈ 0), b8 degrada calidad (rep. bigramas 24%)</li>
-          <li>OPUS-MT supera en BLEU y velocidad — esperado, comparación ilustrativa no competitiva</li>
-          <li>Errores cualitativos: repetición de contenido y salidas cortas — límites teóricos del paradigma</li>
-          <li>Cierre: E2D2 combina encoder bidireccional + cross-attention + difusión discreta en un trade-off configurable</li>
-        </ul>
-        <div style="margin-top:.8rem;font-size:.8rem;background:rgba(139,92,246,.07);border-radius:8px;padding:.6rem .9rem;color:var(--purple)">
-          → Cierre: <em>"Quedamos disponibles para preguntas. Gracias."</em>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <h3 style="margin:2.5rem 0 .5rem;font-size:1.05rem;font-weight:700">Posibles Preguntas del Profesor</h3>
-  <div class="faq-grid">
-    <div class="faq">
-      <div class="faq-h" onclick="toggleFaq(this)">
-        <span>¿Por qué 28 capas encoder y solo 4 decoder?</span>
-        <span class="faq-toggle">+</span>
-      </div>
-      <div class="faq-body">
-        El paper argumenta que la mayor capacidad debe concentrarse en <em>entender</em> la entrada.
-        El decoder solo necesita refinar, no comprender. Y como el decoder se ejecuta
-        <code>num_steps × n_bloques</code> veces, un decoder liviano es esencial
-        para que la inferencia sea computacionalmente viable.
-      </div>
-    </div>
-    <div class="faq">
-      <div class="faq-h" onclick="toggleFaq(this)">
-        <span>¿Por qué falló use_cache=False?</span>
-        <span class="faq-toggle">+</span>
-      </div>
-      <div class="faq-body">
-        El cache del encoder no es solo optimización. Las dimensiones que espera el decoder
-        asumen que las representaciones del encoder están pre-computadas en una forma específica.
-        Sin cache, el modelo falla con <code>RuntimeError: tensor a (4) != tensor b (0)</code>
-        — es un error estructural del checkpoint, no de configuración.
-      </div>
-    </div>
-    <div class="faq">
-      <div class="faq-h" onclick="toggleFaq(this)">
-        <span>¿Cómo se entrena E2D2?</span>
-        <span class="faq-toggle">+</span>
-      </div>
-      <div class="faq-body">
-        Con cross-entropy sobre todos los tokens enmascarados en todos los pasos de difusión.
-        No hay vanishing gradient porque el error se propaga desde posiciones [MASK] específicas.
-        El loss promedia sobre todos los pasos del proceso de denoising, no solo el último.
-      </div>
-    </div>
-    <div class="faq">
-      <div class="faq-h" onclick="toggleFaq(this)">
-        <span>¿Por qué OPUS-MT gana en BLEU?</span>
-        <span class="faq-toggle">+</span>
-      </div>
-      <div class="faq-body">
-        OPUS-MT está especializado en De→En y es más liviano. El checkpoint E2D2 fue entrenado
-        en condiciones diferentes. La comparación es <strong>ilustrativa, no competitiva</strong>:
-        el objetivo fue analizar el paradigma de difusión discreta, no ganar un benchmark.
-      </div>
-    </div>
-    <div class="faq">
-      <div class="faq-h" onclick="toggleFaq(this)">
-        <span>¿Qué es absorbing diffusion?</span>
-        <span class="faq-toggle">+</span>
-      </div>
-      <div class="faq-body">
-        El mecanismo de corrupción durante el entrenamiento. Algunos tokens se reemplazan por [MASK].
-        El modelo aprende a recuperarlos. Es la versión discreta del ruido gaussiano de los modelos
-        de difusión de imágenes — el token queda "absorbido" en el estado [MASK].
-      </div>
-    </div>
-    <div class="faq">
-      <div class="faq-h" onclick="toggleFaq(this)">
-        <span>¿Qué significa tie_encoder_decoder_weights=False?</span>
-        <span class="faq-toggle">+</span>
-      </div>
-      <div class="faq-body">
-        Los pesos del encoder y del decoder son completamente independientes.
-        No se comparten parámetros entre las dos mitades del modelo.
-        Confirmado por inspección directa del checkpoint en la <strong>celda 29</strong> del notebook.
+        Con <code>block_size=2</code>, los bloques no tienen ventana temporal suficiente
+        (<strong style="color:var(--red)">BLEU ≈ 0</strong>).
+        Consistente con los límites teóricos de difusión discreta con pocos pasos de refinamiento.
       </div>
     </div>
   </div>
@@ -1019,115 +963,71 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2.5rem 2
 <div class="divider"></div>
 
 <!-- FOOTER -->
-<footer>
-  <div class="ft">E2D2 — Encoder-Decoder Diffusion Language Models</div>
+<footer style="background:var(--bg2);border-top:1px solid var(--border);padding:2.5rem 2rem;text-align:center;color:var(--t3);font-size:.83rem">
+  <div style="font-size:.95rem;font-weight:600;color:var(--t2);margin-bottom:.4rem">E2D2 — Encoder-Decoder Diffusion Language Models</div>
   <div style="margin-bottom:.4rem;color:var(--t2)">Especialización en Ciencia de Datos · 2026-01 · Computación en la Nube</div>
   <div style="margin-bottom:1rem">Mateo González · Jorge Luis Fong · Jhonatan Rengifo · Nicolás Vásquez</div>
-  <div class="links-row">
-    <a href="https://arxiv.org/abs/2510.22852" target="_blank">📄 Paper arXiv:2510.22852</a>
-    <a href="https://github.com/kuleshov-group/e2d2" target="_blank">💻 Código Oficial</a>
-    <a href="https://huggingface.co/kuleshov-group/e2d2-wmt" target="_blank">🤗 Checkpoint HuggingFace</a>
+  <div style="display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;margin:.8rem 0">
+    <a href="https://arxiv.org/abs/2510.22852" target="_blank" style="color:var(--cyan);font-size:.8rem">📄 Paper arXiv:2510.22852</a>
+    <a href="https://github.com/kuleshov-group/e2d2" target="_blank" style="color:var(--cyan);font-size:.8rem">💻 Código Oficial</a>
+    <a href="https://huggingface.co/kuleshov-group/e2d2-wmt" target="_blank" style="color:var(--cyan);font-size:.8rem">🤗 Checkpoint HuggingFace</a>
   </div>
-  <div style="font-size:.75rem;color:var(--t3)">
+  <div style="font-size:.75rem">
     Checkpoint: <code>kuleshov-group/e2d2-wmt @ 7c65309</code> · Dataset: WMT14 de-en
   </div>
 </footer>
 
 <script>
-// ---- TABS ----
-function tab(e, id) {
-  document.querySelectorAll('.tbtn').forEach(b => b.classList.remove('on'));
-  document.querySelectorAll('.tpanel').forEach(p => p.classList.remove('on'));
+function tab(e,id){
+  document.querySelectorAll('.tbtn').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.tpanel').forEach(p=>p.classList.remove('on'));
   e.target.classList.add('on');
   document.getElementById(id).classList.add('on');
 }
 
-// ---- DIFFUSION STEPPER ----
-var steps = [
-  {
-    toks: ['[MASK]','[MASK]','[MASK]','[MASK]'],
-    st:   ['masked','masked','masked','masked'],
-    desc: 'Estado inicial: los 4 tokens del bloque están completamente enmascarados. El decoder aplica cross-attention con el encoder en cada iteración.',
-    ctr:  'Inicio · Paso 0 de 4'
-  },
-  {
-    toks: ['Good','[MASK]','[MASK]','[MASK]'],
-    st:   ['revealed','masked','masked','masked'],
-    desc: 'Paso 1 — Cross-attention con el encoder: el token más probable emerge. "Good" tiene la mayor probabilidad dada la Query del primer [MASK].',
-    ctr:  'Paso 1 de 4'
-  },
-  {
-    toks: ['Good','morning','[MASK]','[MASK]'],
-    st:   ['revealed','revealed','masked','masked'],
-    desc: 'Paso 2 — Con "Good" como contexto intra-bloque (self-attention), el segundo token se refina: "morning" es altamente probable.',
-    ctr:  'Paso 2 de 4'
-  },
-  {
-    toks: ['Good','morning',',','[MASK]'],
-    st:   ['revealed','revealed','revealed','masked'],
-    desc: 'Paso 3 — La coma se confirma. El self-attention intra-bloque refuerza la coherencia entre los 4 tokens del bloque.',
-    ctr:  'Paso 3 de 4'
-  },
-  {
-    toks: ['Good','morning',',','how'],
-    st:   ['revealed','revealed','revealed','revealed'],
-    desc: '✓ Bloque completo — los 4 tokens quedan fijados. El decoder avanza al siguiente bloque, que comienza de nuevo con [MASK][MASK][MASK][MASK].',
-    ctr:  'Paso 4 de 4 — ¡Bloque fijado!'
-  }
+var steps=[
+  {toks:['[MASK]','[MASK]','[MASK]','[MASK]'],st:['masked','masked','masked','masked'],
+   desc:'Estado inicial: los 4 tokens del bloque están completamente enmascarados. El decoder aplicará <strong>num_steps=4</strong> iteraciones de cross-attention + self-attention.',ctr:'Inicio · Paso 0 de 4'},
+  {toks:['Good','[MASK]','[MASK]','[MASK]'],st:['revealed','masked','masked','masked'],
+   desc:'Paso 1 — Cross-attention con el encoder: el token más probable emerge. "Good" tiene la mayor probabilidad dada la Query del primer [MASK].',ctr:'Paso 1 de 4'},
+  {toks:['Good','morning','[MASK]','[MASK]'],st:['revealed','revealed','masked','masked'],
+   desc:'Paso 2 — Con "Good" como contexto (self-attention intra-bloque), el segundo token se refina: "morning" es altamente probable.',ctr:'Paso 2 de 4'},
+  {toks:['Good','morning',',','[MASK]'],st:['revealed','revealed','revealed','masked'],
+   desc:'Paso 3 — La coma se confirma. El self-attention intra-bloque refuerza la coherencia entre los 4 tokens del bloque activo.',ctr:'Paso 3 de 4'},
+  {toks:['Good','morning',',','how'],st:['revealed','revealed','revealed','revealed'],
+   desc:'✓ Bloque completo — los 4 tokens quedan fijados. El decoder avanza al siguiente bloque, que comienza de nuevo con [MASK][MASK][MASK][MASK].',ctr:'Paso 4 de 4 — ¡Bloque fijado!'}
 ];
 
-function setStep(i) {
-  var s = steps[i];
-  ['bt0','bt1','bt2','bt3'].forEach(function(id,j) {
-    var el = document.getElementById(id);
-    el.textContent = s.toks[j];
-    el.className = 'btoken ' + s.st[j];
+function setStep(i){
+  var s=steps[i];
+  ['bt0','bt1','bt2','bt3'].forEach(function(id,j){
+    var el=document.getElementById(id);
+    el.textContent=s.toks[j];
+    el.className='btoken '+s.st[j];
   });
-  document.getElementById('sdesc').innerHTML = s.desc;
-  document.getElementById('sctr').textContent = s.ctr;
-  document.querySelectorAll('.sbtn').forEach(function(b,j) {
-    b.classList.toggle('on', j === i);
-  });
+  document.getElementById('sdesc').innerHTML=s.desc;
+  document.getElementById('sctr').textContent=s.ctr;
+  document.querySelectorAll('.sbtn').forEach(function(b,j){b.classList.toggle('on',j===i);});
 }
 
-// ---- FAQ TOGGLE ----
-function toggleFaq(h) {
-  h.parentElement.classList.toggle('open');
-}
-
-// ---- MASK GRID ----
-(function buildMaskGrid() {
-  var g = document.getElementById('mask-grid');
-  if (!g) return;
-  // 4 rows (decoder positions in block), 8 cols (4 encoder h* + 4 decoder z*)
-  var labels_col = ['h1','h2','h3','h4','z1','z2','z3','z4'];
-  var rows = 4;
-  for (var r = 0; r < rows; r++) {
-    for (var c = 0; c < 8; c++) {
-      var cell = document.createElement('div');
-      cell.className = 'mg-cell';
-      if (c < 4) {
-        // cross-attention: all decoder rows attend to all encoder columns
-        cell.classList.add('attend');
-        cell.textContent = '✓';
-      } else {
-        // self-attention within block: all positions attend to all (non-causal within block)
-        cell.classList.add('self');
-        cell.textContent = '✓';
-      }
+(function(){
+  var g=document.getElementById('mask-grid');
+  if(!g)return;
+  for(var r=0;r<4;r++){
+    for(var c=0;c<8;c++){
+      var cell=document.createElement('div');
+      cell.className='mg-cell '+(c<4?'attend':'self');
+      cell.textContent='✓';
       g.appendChild(cell);
     }
   }
 })();
 
-// ---- SCROLL REVEAL ----
-if ('IntersectionObserver' in window) {
-  var obs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      if (e.isIntersecting) { e.target.classList.add('in'); }
-    });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+if('IntersectionObserver' in window){
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in');});
+  },{threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
 }
 </script>
 </body>
